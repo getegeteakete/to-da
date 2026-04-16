@@ -66,20 +66,29 @@ body[data-lang="ja"] [data-jp]{display:inline}
   position:relative;
   height:100vh;
   min-height:720px;
-  background:url("hero-final.png") no-repeat center center;
+  background:url("https://images.unsplash.com/photo-1545569341-9eb8b30979d9?auto=format&fit=crop&w=2400&q=85") no-repeat center center;
   background-size:cover;
   display:flex;
   align-items:center;
   justify-content:center;
   overflow:hidden;
 }
+/* 夜景風の色調調整 */
+.hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(135deg, rgba(25,35,70,0.4) 0%, rgba(15,25,40,0.6) 100%);
+  mix-blend-mode:multiply;
+  z-index:1;
+}
 .hero-media{display:none}
 .hero::before{
   content:"";
   position:absolute;
   inset:0;
-  background:rgba(0,0,0,0.35);
-  z-index:1;
+  background:rgba(0,0,0,0.3);
+  z-index:2;
 }
 .hero::after{display:none}
 .hero-inner{position:relative;z-index:3;text-align:center;padding:0 24px;width:100%}
