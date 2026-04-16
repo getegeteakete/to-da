@@ -273,6 +273,54 @@ body[data-lang="en"] .foot-col a{font-family:var(--serif-en);font-size:14px;lett
   .hero-title{letter-spacing:0.2em;text-indent:0.2em}
 }
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms !important;transition-duration:.01ms !important}}
+
+/* Scroll to Top Button */
+.scroll-to-top{position:fixed;bottom:32px;right:32px;z-index:90;width:54px;height:54px;background:rgba(26,25,21,0.9);backdrop-filter:blur(12px);border:1px solid var(--hairline);border-radius:50%;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transform:translateY(20px);transition:opacity .6s var(--ease),visibility .6s var(--ease),transform .6s var(--ease),background .3s,border-color .3s;cursor:pointer}
+.scroll-to-top.show{opacity:1;visibility:visible;transform:translateY(0)}
+.scroll-to-top:hover{background:rgba(201,169,110,0.15);border-color:var(--hinoki)}
+.scroll-to-top::before{content:"";width:12px;height:12px;border-left:1.5px solid var(--kinari);border-top:1.5px solid var(--kinari);transform:rotate(45deg);transition:border-color .3s}
+.scroll-to-top:hover::before{border-color:var(--hinoki)}
+
+/* AI Chatbot */
+.chatbot-container{position:fixed;bottom:32px;left:32px;z-index:95}
+.chatbot-toggle{width:64px;height:64px;background:linear-gradient(135deg,var(--hinoki) 0%,var(--hinoki-dk) 100%);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:transform .3s var(--ease),box-shadow .3s;box-shadow:0 8px 32px rgba(0,0,0,0.3)}
+.chatbot-toggle:hover{transform:scale(1.05);box-shadow:0 12px 40px rgba(0,0,0,0.4)}
+.chatbot-toggle svg{width:28px;height:28px;fill:var(--sumi)}
+.chatbot-panel{position:absolute;bottom:80px;left:0;width:360px;height:480px;background:rgba(26,25,21,0.98);backdrop-filter:blur(20px);border:1px solid var(--hairline);border-radius:16px;opacity:0;visibility:hidden;transform:translateY(20px) scale(0.95);transition:opacity .4s var(--ease),visibility .4s var(--ease),transform .4s var(--ease);overflow:hidden}
+.chatbot-panel.open{opacity:1;visibility:visible;transform:translateY(0) scale(1)}
+.chatbot-header{padding:20px 24px;border-bottom:1px solid var(--hairline);display:flex;align-items:center;justify-content:space-between}
+.chatbot-title{font-family:var(--serif-jp);font-size:16px;color:var(--gofun);font-weight:400;letter-spacing:0.1em}
+.chatbot-close{width:28px;height:28px;display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0.7;transition:opacity .3s}
+.chatbot-close:hover{opacity:1}
+.chatbot-close::before,.chatbot-close::after{content:"";position:absolute;width:14px;height:1px;background:var(--kinari);transition:background .3s}
+.chatbot-close::before{transform:rotate(45deg)}
+.chatbot-close::after{transform:rotate(-45deg)}
+.chatbot-close:hover::before,.chatbot-close:hover::after{background:var(--hinoki)}
+.chatbot-messages{flex:1;padding:20px;overflow-y:auto;max-height:340px}
+.chat-message{margin-bottom:16px;display:flex;align-items:flex-start;gap:12px}
+.chat-message.bot .avatar{width:32px;height:32px;background:var(--hinoki);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--serif-jp);font-size:12px;color:var(--sumi);font-weight:500}
+.chat-message.user{justify-content:flex-end}
+.chat-message.user .message{background:var(--hinoki);color:var(--sumi)}
+.message{background:var(--sumi-soft);color:var(--kinari);padding:12px 16px;border-radius:16px;max-width:280px;font-size:13px;line-height:1.6;letter-spacing:0.02em;border:1px solid var(--hairline-2)}
+.message.typing{position:relative}
+.message.typing::after{content:"";position:absolute;right:12px;top:50%;transform:translateY(-50%);width:3px;height:3px;background:var(--hinoki);border-radius:50%;animation:typing 1.4s ease-in-out infinite}
+@keyframes typing{0%,60%{opacity:1}30%{opacity:0.3}}
+.chatbot-input{display:flex;padding:16px 20px;border-top:1px solid var(--hairline);gap:12px}
+.chatbot-input input{flex:1;background:transparent;border:1px solid var(--hairline);border-radius:20px;padding:10px 16px;color:var(--gofun);font-size:13px;font-family:var(--serif-en);letter-spacing:0.02em;outline:none;transition:border-color .3s}
+.chatbot-input input:focus{border-color:var(--hinoki)}
+.chatbot-input input::placeholder{color:var(--kinari);opacity:0.5}
+.chatbot-send{width:36px;height:36px;background:var(--hinoki);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .3s}
+.chatbot-send:hover{background:var(--hinoki-dk)}
+.chatbot-send::before{content:"";width:0;height:0;border-left:8px solid var(--sumi);border-top:4px solid transparent;border-bottom:4px solid transparent;margin-left:2px}
+
+@media (max-width:960px){
+  .scroll-to-top{bottom:24px;right:24px;width:48px;height:48px}
+  .scroll-to-top::before{width:10px;height:10px}
+  .chatbot-container{bottom:24px;left:24px}
+  .chatbot-toggle{width:56px;height:56px}
+  .chatbot-toggle svg{width:24px;height:24px}
+  .chatbot-panel{width:320px;height:440px}
+}
 </style>
 </head>
 <body data-lang="ja">
@@ -721,6 +769,43 @@ body[data-lang="en"] .foot-col a{font-family:var(--serif-en);font-size:14px;lett
   </div>
 </footer>
 
+<!-- Scroll to Top Button -->
+<button class="scroll-to-top" id="scrollToTop" aria-label="Scroll to top"></button>
+
+<!-- AI Chatbot -->
+<div class="chatbot-container">
+  <div class="chatbot-toggle" id="chatbotToggle">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M20 2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h4l4 4 4-4h4c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM8 11H6V9h2v2zm4 0h-2V9h2v2zm4 0h-2V9h2v2z"/>
+    </svg>
+  </div>
+  
+  <div class="chatbot-panel" id="chatbotPanel">
+    <div class="chatbot-header">
+      <div class="chatbot-title">
+        <span data-jp>透雫 コンシェルジュ</span>
+        <span data-en>Tōda Concierge</span>
+      </div>
+      <div class="chatbot-close" id="chatbotClose"></div>
+    </div>
+    
+    <div class="chatbot-messages" id="chatbotMessages">
+      <div class="chat-message bot">
+        <div class="avatar">雫</div>
+        <div class="message">
+          <span data-jp>こんにちは！山荘透雫のご案内をいたします。何かご質問はございますか？</span>
+          <span data-en>Hello! I'm here to help with Sanso Tōda. How may I assist you today?</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="chatbot-input">
+      <input type="text" id="chatInput" placeholder="Type your message..." autocomplete="off">
+      <div class="chatbot-send" id="chatSend"></div>
+    </div>
+  </div>
+</div>
+
 <script>
 window.addEventListener('load',()=>{setTimeout(()=>document.getElementById('loader').classList.add('hide'),1600);});
 const nav=document.getElementById('nav');
@@ -740,6 +825,121 @@ document.querySelectorAll('.reveal, .tl-item, .passage').forEach(el=>io.observe(
 const heroMedia=document.querySelector('.hero-media');
 window.addEventListener('scroll',()=>{const y=window.scrollY;if(y<window.innerHeight){heroMedia.style.transform=`scale(${1+y*0.0004}) translateY(${y*0.2}px)`;}},{passive:true});
 document.getElementById('subscribeForm').addEventListener('submit',function(e){e.preventDefault();const btn=this.querySelector('button');const lang=document.body.dataset.lang;btn.innerHTML=lang==='en'?'Thank you':'ありがとうございました';btn.disabled=true;this.querySelector('input').value='';});
+
+/* Scroll to Top Button */
+const scrollToTop = document.getElementById('scrollToTop');
+window.addEventListener('scroll',()=>{scrollToTop.classList.toggle('show',window.scrollY>400);},{passive:true});
+scrollToTop.addEventListener('click',()=>{window.scrollTo({top:0,behavior:'smooth'});});
+
+/* AI Chatbot */
+const chatbotToggle=document.getElementById('chatbotToggle');
+const chatbotPanel=document.getElementById('chatbotPanel');
+const chatbotClose=document.getElementById('chatbotClose');
+const chatInput=document.getElementById('chatInput');
+const chatSend=document.getElementById('chatSend');
+const chatMessages=document.getElementById('chatbotMessages');
+let isChatOpen=false;
+
+function toggleChat(){isChatOpen=!isChatOpen;chatbotPanel.classList.toggle('open',isChatOpen);}
+chatbotToggle.addEventListener('click',toggleChat);
+chatbotClose.addEventListener('click',toggleChat);
+
+function addMessage(content,isUser=false){
+  const msg=document.createElement('div');
+  msg.className=`chat-message ${isUser?'user':'bot'}`;
+  msg.innerHTML=isUser?`<div class="message">${content}</div>`:`<div class="avatar">雫</div><div class="message">${content}</div>`;
+  chatMessages.appendChild(msg);
+  chatMessages.scrollTop=chatMessages.scrollHeight;
+}
+
+function getAIResponse(input){
+  const lang=document.body.dataset.lang;
+  const responses={
+    ja:{
+      greeting:['こんにちは！','いらっしゃいませ！','お疲れさまです。'],
+      booking:'申し訳ございませんが、ご予約は2026年5月より開始予定です。ニュースレターにご登録いただければ、開始時にご連絡いたします。',
+      location:'山荘透雫は福岡県福岡市早良区飯場711にございます。福岡の美しい山あいの静かな場所です。',
+      history:'当山荘は寛政7年（1795年）創業の230年続く老舗旅館でございます。現在大規模改修中で、2027年春にウェルネスリトリートとしてリニューアルオープン予定です。',
+      facilities:'温泉、懐石料理、瞑想・リトリートプログラムをご用意しております。自然に囲まれた静寂な環境で、心と身体を癒していただけます。',
+      access:'詳しいアクセス方法は開業時にご案内いたします。最寄りの交通機関や送迎サービスについても検討中です。',
+      price:'料金につきましては、2026年春頃に発表予定です。ニュースレターでいち早くお知らせいたします。',
+      contact:'お問い合わせは sansotoda@gmail.com までお気軽にどうぞ。',
+      default:'申し訳ございませんが、詳細な情報は準備中です。ニュースレターにご登録いただければ、最新情報をお届けいたします。'
+    },
+    en:{
+      greeting:['Hello!','Welcome!','Good day to you.'],
+      booking:"I apologize, but reservations will begin in May 2026. Please subscribe to our newsletter to be notified when bookings open.",
+      location:'Sanso Tōda is located at 711 Iiba, Sawara-ku, Fukuoka. It is nestled in the beautiful, tranquil mountains of Fukuoka.',
+      history:'Our ryokan was established in 1795 (Kansei 7) and has a 230-year history. We are currently undergoing major renovations and will reopen as a wellness retreat in Spring 2027.',
+      facilities:'We will offer hot springs, kaiseki cuisine, and meditation/retreat programs. Our serene natural environment provides healing for both mind and body.',
+      access:'Detailed access information will be provided upon opening. We are also considering transportation services from major stations.',
+      price:'Pricing will be announced in Spring 2026. Please subscribe to our newsletter for early access to this information.',
+      contact:'Please feel free to contact us at sansotoda@gmail.com.',
+      default:"I apologize, but detailed information is still being prepared. Please subscribe to our newsletter for the latest updates."
+    }
+  };
+  
+  const r=responses[lang];
+  const lowerInput=input.toLowerCase();
+  
+  if(lowerInput.includes('hello')||lowerInput.includes('hi')||lowerInput.includes('こんにちは')||lowerInput.includes('はじめまして')){
+    return r.greeting[Math.floor(Math.random()*r.greeting.length)];
+  }
+  if(lowerInput.includes('booking')||lowerInput.includes('reservation')||lowerInput.includes('予約')||lowerInput.includes('宿泊')){
+    return r.booking;
+  }
+  if(lowerInput.includes('location')||lowerInput.includes('where')||lowerInput.includes('address')||lowerInput.includes('場所')||lowerInput.includes('住所')||lowerInput.includes('どこ')){
+    return r.location;
+  }
+  if(lowerInput.includes('history')||lowerInput.includes('story')||lowerInput.includes('establish')||lowerInput.includes('歴史')||lowerInput.includes('創業')||lowerInput.includes('いつから')){
+    return r.history;
+  }
+  if(lowerInput.includes('facilities')||lowerInput.includes('service')||lowerInput.includes('experience')||lowerInput.includes('設備')||lowerInput.includes('施設')||lowerInput.includes('サービス')||lowerInput.includes('温泉')||lowerInput.includes('料理')){
+    return r.facilities;
+  }
+  if(lowerInput.includes('access')||lowerInput.includes('transport')||lowerInput.includes('how to get')||lowerInput.includes('アクセス')||lowerInput.includes('行き方')||lowerInput.includes('交通')){
+    return r.access;
+  }
+  if(lowerInput.includes('price')||lowerInput.includes('cost')||lowerInput.includes('fee')||lowerInput.includes('料金')||lowerInput.includes('価格')||lowerInput.includes('いくら')){
+    return r.price;
+  }
+  if(lowerInput.includes('contact')||lowerInput.includes('email')||lowerInput.includes('連絡')||lowerInput.includes('問い合わせ')||lowerInput.includes('メール')){
+    return r.contact;
+  }
+  return r.default;
+}
+
+function sendMessage(){
+  const input=chatInput.value.trim();
+  if(!input)return;
+  
+  addMessage(input,true);
+  chatInput.value='';
+  
+  // Show typing indicator
+  const typingMsg=document.createElement('div');
+  typingMsg.className='chat-message bot';
+  typingMsg.innerHTML='<div class="avatar">雫</div><div class="message typing">...</div>';
+  chatMessages.appendChild(typingMsg);
+  chatMessages.scrollTop=chatMessages.scrollHeight;
+  
+  setTimeout(()=>{
+    chatMessages.removeChild(typingMsg);
+    addMessage(getAIResponse(input));
+  },1500);
+}
+
+chatSend.addEventListener('click',sendMessage);
+chatInput.addEventListener('keypress',(e)=>{if(e.key==='Enter')sendMessage();});
+
+// Update placeholder text on language change
+function updateChatPlaceholder(){
+  const lang=document.body.dataset.lang;
+  chatInput.placeholder=lang==='ja'?'メッセージを入力...':'Type your message...';
+}
+langJa.addEventListener('click',()=>setTimeout(updateChatPlaceholder,100));
+langEn.addEventListener('click',()=>setTimeout(updateChatPlaceholder,100));
+updateChatPlaceholder();
 </script>
 </body>
 </html>
