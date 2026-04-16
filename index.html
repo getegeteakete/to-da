@@ -63,10 +63,13 @@ body[data-lang="ja"] [data-jp]{display:inline}
 
 /* Hero */
 .hero{position:relative;height:100vh;min-height:720px;overflow:hidden;display:flex;align-items:center;justify-content:center}
-.hero-media{position:absolute;inset:0;background-image:url("https://images.unsplash.com/photo-1545569341-9eb8b30979d9?auto=format&fit=crop&w=2400&q=85");background-size:cover;background-position:center 40%;filter:brightness(0.55) saturate(0.75) contrast(1.05);transform:scale(1.08);animation:heroZoom 18s ease-out forwards}
+.hero-media{position:absolute;inset:0;background-image:url("https://images.unsplash.com/photo-1545569341-9eb8b30979d9?auto=format&fit=crop&w=2400&q=85");background-size:cover;background-position:center 40%;filter:brightness(0.35) saturate(0.6) contrast(1.2) hue-rotate(-15deg);transform:scale(1.08);animation:heroZoom 25s ease-out forwards}
+.hero-light{position:absolute;inset:0;background:radial-gradient(ellipse 800px 400px at 65% 30%, rgba(201,169,110,0.08) 0%, transparent 50%);z-index:1;animation:lightShift 12s ease-in-out infinite alternate}
+@keyframes lightShift{0%{transform:translateX(-20px) translateY(-10px);opacity:0.08}100%{transform:translateX(20px) translateY(10px);opacity:0.12}}
 @keyframes heroZoom{to{transform:scale(1)}}
-.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(26,25,21,.55) 0%,rgba(26,25,21,.15) 40%,rgba(26,25,21,.85) 100%),radial-gradient(ellipse at center,transparent 40%,rgba(26,25,21,.6) 100%);z-index:1}
-.hero::after{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;opacity:.1;mix-blend-mode:overlay;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.7'/></svg>")}
+.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,14,11,.75) 0%,rgba(15,14,11,.25) 35%,rgba(15,14,11,.85) 100%),radial-gradient(ellipse at center,transparent 30%,rgba(15,14,11,.75) 100%);z-index:1}
+.hero::after{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;opacity:.15;mix-blend-mode:overlay;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.7'/></svg>");animation:filmGrain 4s ease-in-out infinite alternate}
+@keyframes filmGrain{0%{opacity:.15;transform:translateX(0)}50%{opacity:.12;transform:translateX(-2px)}100%{opacity:.15;transform:translateX(1px)}}
 .hero-inner{position:relative;z-index:3;text-align:center;padding:0 24px;width:100%}
 .hero-eyebrow{font-family:var(--serif-en);font-size:11px;letter-spacing:0.6em;color:var(--hinoki);text-transform:uppercase;font-style:italic;font-weight:400;margin-bottom:38px;opacity:0;animation:rise 1.4s var(--ease-slow) forwards 1.4s}
 .hero-title{font-family:var(--serif-jp);font-weight:400;font-size:clamp(48px,8.5vw,128px);letter-spacing:0.3em;color:var(--gofun);line-height:1;margin-bottom:28px;opacity:0;animation:rise 1.8s var(--ease-slow) forwards 1.7s;text-indent:0.3em}
@@ -494,6 +497,7 @@ body[data-lang="en"] .foot-col a{font-family:var(--serif-en);font-size:14px;lett
 <!-- Hero -->
 <header class="hero">
   <div class="hero-media"></div>
+  <div class="hero-light"></div>
   <div class="hero-inner">
     <div class="hero-eyebrow">— Fukuoka, Japan · Est. 1795 —</div>
     <h1 class="hero-title"><span data-jp>山荘 透雫</span><span data-en>Sanso Tōda</span></h1>
@@ -823,7 +827,7 @@ try{const saved=localStorage.getItem('sansotoda-lang');if(saved){setLang(saved)}
 const io=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in-view');io.unobserve(e.target);}});},{threshold:0.12,rootMargin:'0px 0px -60px 0px'});
 document.querySelectorAll('.reveal, .tl-item, .passage').forEach(el=>io.observe(el));
 const heroMedia=document.querySelector('.hero-media');
-window.addEventListener('scroll',()=>{const y=window.scrollY;if(y<window.innerHeight){heroMedia.style.transform=`scale(${1+y*0.0004}) translateY(${y*0.2}px)`;}},{passive:true});
+window.addEventListener('scroll',()=>{const y=window.scrollY;if(y<window.innerHeight){heroMedia.style.transform=`scale(${1.08 + y*0.0003}) translateY(${y*0.15}px)`;heroMedia.style.filter=`brightness(${0.35 - y*0.0001}) saturate(${0.6 + y*0.0002}) contrast(${1.2 + y*0.0001}) hue-rotate(${-15 - y*0.01}deg)`;}},{passive:true});
 document.getElementById('subscribeForm').addEventListener('submit',function(e){e.preventDefault();const btn=this.querySelector('button');const lang=document.body.dataset.lang;btn.innerHTML=lang==='en'?'Thank you':'ありがとうございました';btn.disabled=true;this.querySelector('input').value='';});
 
 /* Scroll to Top Button */
