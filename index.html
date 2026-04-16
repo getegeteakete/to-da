@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>山荘 透雫 Sanso Tōda | 福岡・山のウェルネスリトリート 230年の旅館</title>
+<meta name="description" content="福岡の山あいに佇む、築230年の旅館。静謐な時間と自然のなかで、魂の帰る場所を。2027年春、ウェルネスリトリートとして静かに扉を開きます。" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Noto+Serif+JP:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --sumi:#1a1915;--sumi-soft:#242320;--sumi-deep:#0f0e0b;
+  --gofun:#f5f1e8;--kinari:#ede6d3;
+  --hinoki:#c9a96e;--hinoki-dk:#8a7548;
+  --koke:#4a5240;--kohaku:#b2724e;
+  --hairline:rgba(245,241,232,0.18);
+  --hairline-2:rgba(245,241,232,0.08);
+  --serif-jp:'Shippori Mincho','Noto Serif JP',serif;
+  --serif-en:'Cormorant Garamond','Shippori Mincho',serif;
+  --body-jp:'Noto Serif JP','Shippori Mincho',serif;
+  --ease:cubic-bezier(.2,.7,.2,1);
+  --ease-slow:cubic-bezier(.19,1,.22,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+body{background:var(--sumi);color:var(--gofun);font-family:var(--body-jp);font-weight:300;line-height:1.9;letter-spacing:0.04em;overflow-x:hidden}
+body[data-lang="en"]{font-family:var(--serif-en);letter-spacing:0.02em;font-weight:400}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit;text-decoration:none}
+button{font:inherit;background:none;border:none;color:inherit;cursor:pointer}
+svg{display:block}
+body[data-lang="ja"] [data-en]{display:none}
+body[data-lang="en"] [data-jp]{display:none}
+body[data-lang="en"] [data-en]{display:inline}
+body[data-lang="ja"] [data-jp]{display:inline}
+
+/* Loader */
+.loader{position:fixed;inset:0;background:var(--sumi-deep);z-index:9999;display:flex;align-items:center;justify-content:center;transition:opacity 1.2s var(--ease-slow),visibility 1.2s}
+.loader.hide{opacity:0;visibility:hidden;pointer-events:none}
+.loader-mark{font-family:var(--serif-jp);color:var(--kinari);font-size:13px;letter-spacing:0.9em;text-indent:0.9em;opacity:0;animation:fadeUp 1.8s var(--ease-slow) forwards .3s}
+.loader-line{position:absolute;left:50%;top:calc(50% + 44px);transform:translateX(-50%);width:0;height:1px;background:var(--hinoki);animation:drawLine 1.6s var(--ease-slow) forwards .8s}
+@keyframes drawLine{to{width:120px}}
+@keyframes fadeUp{to{opacity:1}}
+
+/* Nav */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:22px 44px;display:flex;align-items:center;justify-content:space-between;transition:background .6s var(--ease),backdrop-filter .6s var(--ease),padding .5s var(--ease),border-color .6s;border-bottom:1px solid transparent}
+.nav.scrolled{padding:14px 44px;background:rgba(26,25,21,0.82);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom-color:var(--hairline)}
+.nav-logo{font-family:var(--serif-jp);font-size:17px;letter-spacing:0.55em;font-weight:500;color:var(--gofun);text-indent:0.55em;line-height:1.2}
+.nav-logo small{display:block;font-family:var(--serif-en);font-size:9.5px;letter-spacing:0.5em;color:var(--hinoki);margin-top:4px;text-indent:0.5em;font-style:italic;font-weight:400}
+.nav-menu{display:flex;gap:36px;align-items:center}
+.nav-menu a{font-family:var(--serif-en);font-size:11.5px;letter-spacing:0.32em;text-transform:uppercase;color:var(--kinari);position:relative;padding:8px 0;transition:color .4s;font-style:italic}
+.nav-menu a::after{content:"";position:absolute;left:0;bottom:2px;width:0;height:1px;background:var(--hinoki);transition:width .5s var(--ease)}
+.nav-menu a:hover{color:var(--hinoki)}
+.nav-menu a:hover::after{width:100%}
+.lang-switch{display:flex;gap:0;align-items:center;border:1px solid var(--hairline);padding:6px 10px}
+.lang-switch button{font-family:var(--serif-en);font-size:10.5px;letter-spacing:0.25em;padding:3px 8px;color:var(--kinari);opacity:.55;transition:opacity .3s,color .3s}
+.lang-switch button.active{opacity:1;color:var(--hinoki)}
+.lang-switch span{opacity:.35;margin:0 2px;font-size:10px}
+.nav-toggle{display:none}
+
+/* Hero */
+.hero{position:relative;height:100vh;min-height:720px;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.hero-media{position:absolute;inset:0;background-image:url("https://images.unsplash.com/photo-1545569341-9eb8b30979d9?auto=format&fit=crop&w=2400&q=85");background-size:cover;background-position:center 40%;filter:brightness(0.55) saturate(0.75) contrast(1.05);transform:scale(1.08);animation:heroZoom 18s ease-out forwards}
+@keyframes heroZoom{to{transform:scale(1)}}
+.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(26,25,21,.55) 0%,rgba(26,25,21,.15) 40%,rgba(26,25,21,.85) 100%),radial-gradient(ellipse at center,transparent 40%,rgba(26,25,21,.6) 100%);z-index:1}
+.hero::after{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;opacity:.1;mix-blend-mode:overlay;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.7'/></svg>")}
+.hero-inner{position:relative;z-index:3;text-align:center;padding:0 24px;width:100%}
+.hero-eyebrow{font-family:var(--serif-en);font-size:11px;letter-spacing:0.6em;color:var(--hinoki);text-transform:uppercase;font-style:italic;font-weight:400;margin-bottom:38px;opacity:0;animation:rise 1.4s var(--ease-slow) forwards 1.4s}
+.hero-title{font-family:var(--serif-jp);font-weight:400;font-size:clamp(48px,8.5vw,128px);letter-spacing:0.3em;color:var(--gofun);line-height:1;margin-bottom:28px;opacity:0;animation:rise 1.8s var(--ease-slow) forwards 1.7s;text-indent:0.3em}
+body[data-lang="en"] .hero-title{font-family:var(--serif-en);font-style:italic;font-weight:300;letter-spacing:0.18em;text-indent:0.18em;font-size:clamp(52px,9vw,140px)}
+.hero-subtitle{font-family:var(--serif-en);font-style:italic;font-weight:300;font-size:clamp(16px,1.6vw,22px);letter-spacing:0.3em;color:var(--kinari);opacity:0;animation:rise 1.6s var(--ease-slow) forwards 2.1s}
+body[data-lang="en"] .hero-subtitle{font-family:var(--serif-jp);font-style:normal;font-weight:300;letter-spacing:0.4em}
+.hero-divider{width:1px;height:70px;background:var(--hinoki);margin:48px auto 0;transform:scaleY(0);transform-origin:top;animation:grow 1.8s var(--ease-slow) forwards 2.5s}
+@keyframes grow{to{transform:scaleY(1)}}
+@keyframes rise{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+.hero-meta{position:absolute;z-index:3;font-family:var(--serif-en);font-size:10px;letter-spacing:0.4em;color:var(--kinari);opacity:0;animation:fadeIn 1.2s forwards 2.8s;text-transform:uppercase;font-style:italic}
+.hero-meta.left{left:44px;bottom:40px;writing-mode:vertical-rl}
+.hero-meta.right{right:44px;bottom:40px;writing-mode:vertical-rl}
+.hero-scroll{position:absolute;bottom:36px;left:50%;transform:translateX(-50%);z-index:3;font-family:var(--serif-en);font-size:10px;letter-spacing:0.5em;color:var(--kinari);text-transform:uppercase;opacity:0;animation:fadeIn 1.2s forwards 3s}
+.hero-scroll::before{content:"";display:block;width:1px;height:36px;background:var(--kinari);margin:0 auto 14px;animation:scrollLine 2.2s ease-in-out infinite}
+@keyframes scrollLine{0%,100%{transform:scaleY(1);transform-origin:top}50%{transform:scaleY(.3);transform-origin:top}}
+@keyframes fadeIn{to{opacity:1}}
+
+/* Shared */
+section{position:relative}
+.container{max-width:1280px;margin:0 auto;padding:0 44px}
+.eyebrow{font-family:var(--serif-en);font-size:11px;letter-spacing:0.5em;color:var(--hinoki);text-transform:uppercase;font-style:italic;display:inline-block;position:relative;padding-left:36px;margin-bottom:32px;font-weight:400}
+.eyebrow::before{content:"";position:absolute;left:0;top:50%;width:24px;height:1px;background:var(--hinoki)}
+.eyebrow.centered{padding-left:0}
+.eyebrow.centered::before{display:none}
+.eyebrow.centered::after{content:"";display:block;width:32px;height:1px;background:var(--hinoki);margin:14px auto 0}
+.section-title{font-family:var(--serif-jp);font-weight:400;font-size:clamp(32px,4.5vw,64px);letter-spacing:0.2em;line-height:1.3;color:var(--gofun);margin-bottom:48px;text-indent:0.2em}
+body[data-lang="en"] .section-title{font-family:var(--serif-en);font-style:italic;font-weight:300;letter-spacing:0.06em;text-indent:0;font-size:clamp(36px,5vw,72px)}
+.body-text{font-size:15px;line-height:2.2;color:var(--kinari);opacity:.88;max-width:58ch;letter-spacing:0.08em;font-weight:300}
+body[data-lang="en"] .body-text{font-family:var(--serif-en);font-size:17px;line-height:1.85;letter-spacing:0.01em;font-weight:400}
+
+/* Prologue */
+.prologue{padding:180px 0 160px;background:var(--sumi);position:relative;text-align:center;overflow:hidden}
+.prologue::before{content:"";position:absolute;left:50%;top:0;width:1px;height:80px;background:var(--hinoki);transform:translateX(-50%)}
+.prologue-kanji{font-family:var(--serif-jp);font-size:clamp(140px,22vw,320px);font-weight:300;color:var(--sumi-soft);line-height:1;letter-spacing:0.1em;position:absolute;left:50%;top:52%;transform:translate(-50%,-50%);z-index:0;opacity:.55;user-select:none;pointer-events:none;white-space:nowrap}
+body[data-lang="en"] .prologue-kanji{font-family:var(--serif-en);font-style:italic;font-size:clamp(80px,14vw,200px);letter-spacing:0.04em}
+.prologue-inner{position:relative;z-index:1;max-width:680px;margin:0 auto;padding:0 24px}
+.prologue-inner p{font-family:var(--serif-jp);font-weight:300;font-size:clamp(17px,1.8vw,22px);line-height:2.5;letter-spacing:0.2em;color:var(--gofun)}
+body[data-lang="en"] .prologue-inner p{font-family:var(--serif-en);font-style:italic;font-weight:300;letter-spacing:0.01em;line-height:1.9}
+.prologue-sign{display:block;margin-top:56px;font-family:var(--serif-en);font-size:11px;letter-spacing:0.5em;color:var(--hinoki);font-style:italic;text-transform:uppercase}
+
+/* Philosophy */
+.philosophy{padding:180px 0;background:var(--sumi)}
+.philosophy-grid{display:grid;grid-template-columns:1fr 1fr;gap:90px;align-items:center}
+.philosophy-visual{position:relative;aspect-ratio:3/4;overflow:hidden;background:var(--sumi-deep)}
+.philosophy-visual img{width:100%;height:100%;object-fit:cover;filter:brightness(.78) saturate(.85) contrast(1.05);transition:transform 2s var(--ease-slow),filter .8s}
+.philosophy-visual:hover img{transform:scale(1.05);filter:brightness(.88) saturate(.95)}
+.philosophy-visual::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(to bottom,transparent 55%,rgba(26,25,21,.5))}
+.philosophy-num{position:absolute;top:24px;left:24px;z-index:2;font-family:var(--serif-en);font-size:11px;letter-spacing:0.4em;color:var(--kinari);font-style:italic}
+.philosophy-seal{position:absolute;bottom:24px;right:24px;z-index:2;width:48px;height:48px;border:1px solid var(--hinoki);display:flex;align-items:center;justify-content:center;color:var(--hinoki);font-family:var(--serif-jp);font-size:16px;letter-spacing:0;background:rgba(26,25,21,0.4);backdrop-filter:blur(4px)}
+.philosophy-text .section-title{margin-bottom:36px}
+.philosophy-quote{font-family:var(--serif-jp);font-weight:300;font-size:clamp(20px,2vw,28px);color:var(--hinoki);line-height:1.85;letter-spacing:0.18em;margin-bottom:36px}
+body[data-lang="en"] .philosophy-quote{font-family:var(--serif-en);font-style:italic;font-weight:400;letter-spacing:0.02em;line-height:1.5}
+
+/* Experiences */
+.experiences{padding:180px 0 160px;background:linear-gradient(180deg,var(--sumi) 0%,#15140f 100%);position:relative}
+.experiences-head{text-align:center;margin-bottom:100px}
+.experiences-head .body-text{margin:0 auto;text-align:center}
+.exp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--hairline)}
+.exp-item{padding:56px 38px 64px;border-right:1px solid var(--hairline);border-bottom:1px solid var(--hairline);transition:background .8s var(--ease);position:relative;overflow:hidden}
+.exp-item:last-child{border-right:none}
+.exp-item::before{content:"";position:absolute;left:0;right:0;bottom:0;height:0;background:linear-gradient(to top,rgba(201,169,110,.06),transparent);transition:height .8s var(--ease)}
+.exp-item:hover::before{height:100%}
+.exp-art{position:relative;aspect-ratio:4/3;overflow:hidden;margin-bottom:38px;background:var(--sumi-deep)}
+.exp-art svg,.exp-art img{width:100%;height:100%;display:block}
+.exp-art img{object-fit:cover;filter:brightness(.82) saturate(.88) contrast(1.02);transition:transform 1.6s var(--ease-slow),filter .8s}
+.exp-item:hover .exp-art img{transform:scale(1.06);filter:brightness(.92) saturate(1)}
+.exp-art::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(to bottom,transparent 55%,rgba(15,14,11,.4))}
+.exp-num{font-family:var(--serif-en);font-size:11px;letter-spacing:0.4em;color:var(--hinoki);font-style:italic;margin-bottom:14px;display:block}
+.exp-title{font-family:var(--serif-jp);font-weight:400;font-size:26px;letter-spacing:0.22em;line-height:1.4;color:var(--gofun);margin-bottom:8px;text-indent:0.22em}
+body[data-lang="en"] .exp-title{font-family:var(--serif-en);font-style:italic;font-weight:400;letter-spacing:0.03em;font-size:32px;text-indent:0}
+.exp-title-en{font-family:var(--serif-en);font-size:12px;letter-spacing:0.32em;color:var(--hinoki-dk);margin-bottom:22px;text-transform:uppercase;font-style:italic}
+body[data-lang="en"] .exp-title-en{font-family:var(--serif-jp);font-style:normal;letter-spacing:0.25em}
+.exp-desc{font-size:13.5px;line-height:2.05;color:var(--kinari);opacity:.82;letter-spacing:0.08em;font-weight:300}
+body[data-lang="en"] .exp-desc{font-family:var(--serif-en);font-size:15px;line-height:1.8;letter-spacing:0.01em}
+
+/* Passage of Time */
+.passage{position:relative;height:100vh;min-height:680px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.passage-bg{position:absolute;inset:0;background-image:url("https://images.unsplash.com/photo-1526481280693-3bfa7568e0f3?auto=format&fit=crop&w=2400&q=85");background-size:cover;background-position:center;filter:brightness(.42) saturate(.8);transform:scale(1.05);transition:transform 20s linear}
+.passage.in-view .passage-bg{transform:scale(1.15)}
+.passage::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(135deg,rgba(26,25,21,.5),rgba(26,25,21,.3) 50%,rgba(26,25,21,.65))}
+.passage::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;opacity:.08;mix-blend-mode:overlay;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>")}
+.passage-inner{position:relative;z-index:2;text-align:center;padding:0 24px}
+.passage-eyebrow{font-family:var(--serif-en);font-size:11px;letter-spacing:0.6em;color:var(--hinoki);font-style:italic;text-transform:uppercase;margin-bottom:32px}
+.passage-title{font-family:var(--serif-en);font-weight:300;font-style:italic;font-size:clamp(54px,9vw,140px);letter-spacing:0.04em;line-height:.95;color:var(--gofun);margin-bottom:24px}
+body[data-lang="ja"] .passage-title{font-family:var(--serif-jp);font-style:normal;font-weight:300;letter-spacing:0.3em;text-indent:0.3em;font-size:clamp(44px,7vw,108px)}
+.passage-sub{font-family:var(--serif-jp);font-weight:300;font-size:clamp(15px,1.4vw,19px);letter-spacing:0.45em;color:var(--kinari);text-indent:0.45em}
+body[data-lang="en"] .passage-sub{font-family:var(--serif-en);font-style:italic;font-weight:400;letter-spacing:0.15em;text-indent:0}
+.passage-numbers{display:flex;gap:clamp(20px,4vw,52px);justify-content:center;margin-top:72px;font-family:var(--serif-en);font-style:italic;color:var(--kinari);font-size:clamp(12px,1.1vw,14px);letter-spacing:0.25em;opacity:.75;flex-wrap:wrap}
+.passage-numbers span.dot{color:var(--hinoki);opacity:1}
+.passage-numbers span.now{color:var(--hinoki);opacity:1;position:relative}
+.passage-numbers span.now::after{content:"";position:absolute;left:50%;bottom:-10px;transform:translateX(-50%);width:6px;height:1px;background:var(--hinoki)}
+
+/* Architecture */
+.architecture{padding:180px 0;background:var(--sumi)}
+.arch-head{display:grid;grid-template-columns:1fr 1fr;gap:80px;margin-bottom:100px;align-items:end}
+.arch-head .body-text{justify-self:end}
+.arch-mosaic{display:grid;grid-template-columns:repeat(12,1fr);gap:16px;grid-auto-rows:80px}
+.arch-mosaic figure{position:relative;overflow:hidden;background:var(--sumi-deep)}
+.arch-mosaic figure img,.arch-mosaic figure svg{width:100%;height:100%;display:block}
+.arch-mosaic figure img{object-fit:cover;filter:brightness(.82) saturate(.88);transition:transform 1.8s var(--ease-slow),filter .8s}
+.arch-mosaic figure:hover img{transform:scale(1.06);filter:brightness(.95) saturate(1)}
+.arch-mosaic figcaption{position:absolute;left:18px;bottom:18px;z-index:2;font-family:var(--serif-en);font-size:10px;letter-spacing:0.3em;color:var(--gofun);text-transform:uppercase;font-style:italic;opacity:.9}
+.arch-mosaic figcaption small{display:block;font-family:var(--serif-jp);font-style:normal;font-size:10px;letter-spacing:0.3em;color:var(--hinoki);margin-top:4px}
+.arch-mosaic .m1{grid-column:span 7;grid-row:span 5}
+.arch-mosaic .m2{grid-column:span 5;grid-row:span 3}
+.arch-mosaic .m3{grid-column:span 5;grid-row:span 2}
+.arch-mosaic .m4{grid-column:span 4;grid-row:span 3}
+.arch-mosaic .m5{grid-column:span 8;grid-row:span 3}
+.arch-mosaic figure::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(to bottom,transparent 60%,rgba(15,14,11,.55))}
+
+/* Timeline */
+.timeline-sec{padding:180px 0;background:linear-gradient(180deg,var(--sumi) 0%,#15140f 100%);position:relative}
+.timeline-head{text-align:center;margin-bottom:100px}
+.timeline{max-width:860px;margin:0 auto;position:relative;padding:0 24px}
+.timeline::before{content:"";position:absolute;left:50%;top:0;bottom:0;width:1px;background:var(--hairline);transform:translateX(-50%)}
+.tl-item{display:grid;grid-template-columns:1fr 80px 1fr;align-items:center;margin-bottom:64px;min-height:80px;opacity:0;transform:translateY(24px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.tl-item.in-view{opacity:1;transform:translateY(0)}
+.tl-item:nth-child(even) .tl-content{grid-column:3;text-align:left;padding-left:40px}
+.tl-item:nth-child(even) .tl-date{grid-column:1;text-align:right;padding-right:40px}
+.tl-item:nth-child(odd) .tl-content{grid-column:1;text-align:right;padding-right:40px}
+.tl-item:nth-child(odd) .tl-date{grid-column:3;text-align:left;padding-left:40px}
+.tl-dot{grid-column:2;width:11px;height:11px;border-radius:50%;background:var(--hinoki);margin:0 auto;position:relative;box-shadow:0 0 0 6px rgba(201,169,110,0.12)}
+.tl-item.is-done .tl-dot{background:var(--koke);box-shadow:0 0 0 6px rgba(74,82,64,0.2)}
+.tl-item.is-next .tl-dot{animation:pulse 2.4s ease-in-out infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 6px rgba(201,169,110,0.12)}50%{box-shadow:0 0 0 16px rgba(201,169,110,0.04)}}
+.tl-date{font-family:var(--serif-en);font-style:italic;font-size:14px;letter-spacing:0.25em;color:var(--hinoki);text-transform:uppercase}
+.tl-title{font-family:var(--serif-jp);font-weight:400;font-size:19px;letter-spacing:0.18em;color:var(--gofun);margin-bottom:6px}
+body[data-lang="en"] .tl-title{font-family:var(--serif-en);font-style:italic;font-weight:500;letter-spacing:0.03em;font-size:22px}
+.tl-desc{font-size:12.5px;color:var(--kinari);opacity:.7;letter-spacing:0.1em;font-weight:300}
+body[data-lang="en"] .tl-desc{font-family:var(--serif-en);font-size:14px;letter-spacing:0.02em}
+.tl-tag{display:inline-block;font-family:var(--serif-en);font-size:9px;letter-spacing:0.3em;color:var(--koke);margin-left:10px;text-transform:uppercase;padding:3px 9px;border:1px solid var(--koke);vertical-align:middle}
+.tl-item.is-next .tl-tag{color:var(--hinoki);border-color:var(--hinoki)}
+
+/* CTA */
+.cta{padding:180px 0;background:var(--sumi);text-align:center;position:relative;overflow:hidden}
+.cta::before{content:"";position:absolute;left:50%;top:60px;width:1px;height:60px;background:var(--hinoki);transform:translateX(-50%)}
+.cta-seal{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-family:var(--serif-jp);font-size:clamp(180px,28vw,400px);color:var(--sumi-soft);opacity:.3;z-index:0;user-select:none;pointer-events:none;line-height:1}
+.cta-inner{max-width:640px;margin:0 auto;padding:0 24px;position:relative;z-index:1}
+.cta-title{font-family:var(--serif-jp);font-weight:400;font-size:clamp(30px,3.6vw,48px);letter-spacing:0.22em;line-height:1.5;color:var(--gofun);margin-bottom:28px;text-indent:0.22em}
+body[data-lang="en"] .cta-title{font-family:var(--serif-en);font-style:italic;font-weight:300;letter-spacing:0.03em;text-indent:0}
+.cta-desc{font-family:var(--serif-jp);font-size:14.5px;line-height:2.1;color:var(--kinari);opacity:.85;letter-spacing:0.1em;margin-bottom:56px;font-weight:300}
+body[data-lang="en"] .cta-desc{font-family:var(--serif-en);font-size:16px;letter-spacing:0.02em;line-height:1.8}
+.cta-form{display:flex;gap:0;border-bottom:1px solid var(--hairline);max-width:520px;margin:0 auto;transition:border-color .4s}
+.cta-form:focus-within{border-bottom-color:var(--hinoki)}
+.cta-form input{flex:1;background:transparent;border:none;padding:18px 4px;color:var(--gofun);font-family:var(--serif-en);font-size:14px;letter-spacing:0.15em;outline:none}
+.cta-form input::placeholder{color:var(--kinari);opacity:.4;font-style:italic}
+.cta-form button{padding:18px 28px;color:var(--hinoki);font-family:var(--serif-en);font-size:11px;letter-spacing:0.4em;text-transform:uppercase;font-style:italic;font-weight:500;transition:letter-spacing .4s,color .3s}
+.cta-form button:hover{letter-spacing:0.5em;color:var(--gofun)}
+.cta-note{margin-top:24px;font-family:var(--serif-en);font-style:italic;font-size:11px;letter-spacing:0.15em;color:var(--kinari);opacity:.5}
+body[data-lang="ja"] .cta-note{font-family:var(--serif-jp);font-style:normal;letter-spacing:0.08em}
+
+/* Footer */
+footer{background:var(--sumi-deep);padding:100px 0 40px;border-top:1px solid var(--hairline)}
+.foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:60px;padding-bottom:80px;border-bottom:1px solid var(--hairline)}
+.foot-brand h3{font-family:var(--serif-jp);font-weight:500;font-size:22px;letter-spacing:0.45em;color:var(--gofun);margin-bottom:6px;text-indent:0.45em}
+.foot-brand small{font-family:var(--serif-en);font-size:11px;letter-spacing:0.45em;color:var(--hinoki);font-style:italic;text-transform:uppercase}
+.foot-brand p{font-size:12.5px;color:var(--kinari);opacity:.65;line-height:2.1;margin-top:28px;max-width:300px;letter-spacing:0.08em}
+body[data-lang="en"] .foot-brand p{font-family:var(--serif-en);font-size:13.5px;letter-spacing:0.01em}
+.foot-col h5{font-family:var(--serif-en);font-size:10px;letter-spacing:0.4em;color:var(--hinoki);text-transform:uppercase;font-style:italic;margin-bottom:24px}
+.foot-col ul{list-style:none}
+.foot-col li{margin-bottom:13px}
+.foot-col a{font-family:var(--serif-jp);font-size:13px;letter-spacing:0.1em;color:var(--kinari);opacity:.75;transition:opacity .3s,color .3s;font-weight:300}
+body[data-lang="en"] .foot-col a{font-family:var(--serif-en);font-size:14px;letter-spacing:0.02em}
+.foot-col a:hover{color:var(--hinoki);opacity:1}
+.foot-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:36px;font-family:var(--serif-en);font-size:10.5px;letter-spacing:0.3em;color:var(--kinari);opacity:.45;text-transform:uppercase;font-style:italic}
+
+/* Reveal */
+.reveal{opacity:0;transform:translateY(36px);transition:opacity 1.2s var(--ease-slow),transform 1.2s var(--ease-slow)}
+.reveal.in-view{opacity:1;transform:translateY(0)}
+
+/* Responsive */
+@media (max-width:960px){
+  .nav{padding:18px 24px}.nav.scrolled{padding:12px 24px}
+  .nav-menu{position:fixed;inset:0;background:rgba(15,14,11,0.98);backdrop-filter:blur(20px);flex-direction:column;justify-content:center;gap:32px;transform:translateX(100%);transition:transform .6s var(--ease);z-index:99}
+  .nav-menu.open{transform:translateX(0)}
+  .nav-menu a{font-size:14px;letter-spacing:0.35em}
+  .nav-toggle{display:flex;flex-direction:column;gap:5px;z-index:101;width:28px;cursor:pointer}
+  .nav-toggle span{display:block;height:1px;background:var(--gofun);transition:transform .4s,opacity .3s}
+  .nav-toggle.open span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+  .nav-toggle.open span:nth-child(2){opacity:0}
+  .nav-toggle.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+  .hero-meta{display:none}
+  .container{padding:0 24px}
+  .philosophy{padding:100px 0}.philosophy-grid{grid-template-columns:1fr;gap:56px}
+  .experiences{padding:110px 0 100px}.experiences-head{margin-bottom:60px}
+  .exp-grid{grid-template-columns:1fr}.exp-item{border-right:none;padding:44px 24px 50px}
+  .prologue{padding:100px 0 80px}.architecture{padding:100px 0}
+  .arch-head{grid-template-columns:1fr;gap:32px}.arch-head .body-text{justify-self:start}
+  .arch-mosaic{grid-template-columns:repeat(6,1fr);grid-auto-rows:60px;gap:10px}
+  .arch-mosaic .m1{grid-column:span 6;grid-row:span 4}
+  .arch-mosaic .m2{grid-column:span 6;grid-row:span 3}
+  .arch-mosaic .m3{grid-column:span 3;grid-row:span 2}
+  .arch-mosaic .m4{grid-column:span 3;grid-row:span 2}
+  .arch-mosaic .m5{grid-column:span 6;grid-row:span 3}
+  .timeline-sec{padding:110px 0}.timeline{padding:0 16px}
+  .timeline::before{left:20px;transform:none}
+  .tl-item{grid-template-columns:40px 1fr;gap:0}
+  .tl-item:nth-child(odd) .tl-content,.tl-item:nth-child(even) .tl-content{grid-column:2;grid-row:2;text-align:left;padding:6px 0 0}
+  .tl-item:nth-child(odd) .tl-date,.tl-item:nth-child(even) .tl-date{grid-column:2;grid-row:1;text-align:left;padding:0}
+  .tl-dot{grid-column:1;grid-row:1 / span 2;margin:0;align-self:start;margin-top:6px;margin-left:14px}
+  .cta{padding:110px 0}
+  .foot-grid{grid-template-columns:1fr;gap:40px;padding-bottom:56px}
+  .foot-bottom{flex-direction:column;gap:16px;text-align:center}
+  .hero-title{letter-spacing:0.2em;text-indent:0.2em}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms !important;transition-duration:.01ms !important}}
+</style>
+</head>
+<body data-lang="ja">
+
+<!-- SVG inkwash art library -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<defs>
+<linearGradient id="sumiFade" x1="0" y1="0" x2="0" y2="1">
+  <stop offset="0%" stop-color="#1f1d18"/>
+  <stop offset="100%" stop-color="#0f0e0b"/>
+</linearGradient>
+<radialGradient id="moonGlow" cx="50%" cy="50%" r="50%">
+  <stop offset="0%" stop-color="#ede6d3" stop-opacity="0.8"/>
+  <stop offset="60%" stop-color="#ede6d3" stop-opacity="0.1"/>
+  <stop offset="100%" stop-color="#ede6d3" stop-opacity="0"/>
+</radialGradient>
+
+<symbol id="art-onsen" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="url(#sumiFade)"/>
+  <g opacity="0.5" stroke="#c9a96e" stroke-width="1" fill="none" stroke-linecap="round">
+    <path d="M80 80 Q85 60 82 40 T88 10" opacity="0.3"/>
+    <path d="M120 90 Q128 65 122 40 T130 10" opacity="0.4"/>
+    <path d="M170 70 Q178 50 172 25 T180 0" opacity="0.35"/>
+    <path d="M220 85 Q228 60 222 35 T230 5" opacity="0.3"/>
+    <path d="M270 75 Q278 55 272 30 T280 5" opacity="0.35"/>
+    <path d="M320 90 Q328 65 322 40 T330 10" opacity="0.3"/>
+  </g>
+  <ellipse cx="200" cy="220" rx="170" ry="28" fill="none" stroke="#c9a96e" stroke-width="1.5" opacity="0.7"/>
+  <ellipse cx="200" cy="218" rx="160" ry="22" fill="#1a1915" stroke="#8a7548" stroke-width="0.5" opacity="0.8"/>
+  <g stroke="#c9a96e" fill="none" stroke-width="0.6" opacity="0.55">
+    <ellipse cx="200" cy="218" rx="110" ry="14"/>
+    <ellipse cx="200" cy="218" rx="70" ry="9"/>
+    <ellipse cx="200" cy="218" rx="35" ry="5"/>
+  </g>
+  <path d="M20 220 Q40 195 60 210 Q80 220 60 240 L20 245 Z" fill="#242320" stroke="#3a3730" stroke-width="0.5" opacity="0.85"/>
+  <path d="M340 215 Q360 190 380 205 Q395 220 380 245 L340 248 Z" fill="#242320" stroke="#3a3730" stroke-width="0.5" opacity="0.85"/>
+  <circle cx="330" cy="60" r="32" fill="url(#moonGlow)"/>
+  <circle cx="330" cy="60" r="10" fill="#ede6d3" opacity="0.25"/>
+</symbol>
+
+<symbol id="art-zen" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="url(#sumiFade)"/>
+  <circle cx="200" cy="140" r="88" fill="none" stroke="#c9a96e" stroke-width="2.5" stroke-dasharray="520 30" stroke-dashoffset="20" opacity="0.85" transform="rotate(-20 200 140)"/>
+  <circle cx="200" cy="140" r="70" fill="url(#moonGlow)" opacity="0.2"/>
+  <line x1="40" y1="240" x2="360" y2="240" stroke="#c9a96e" stroke-width="0.8" opacity="0.5"/>
+  <path d="M40 240 L90 210 L130 225 L180 195 L230 215 L280 200 L340 225 L360 240 Z" fill="#0f0e0b" stroke="#3a3730" stroke-width="0.5" opacity="0.9"/>
+  <g fill="none" stroke="#c9a96e" stroke-width="1.2" stroke-linecap="round" opacity="0.85">
+    <ellipse cx="200" cy="258" rx="14" ry="3"/>
+    <path d="M190 258 Q190 248 200 245 Q210 248 210 258"/>
+    <circle cx="200" cy="240" r="4.5"/>
+  </g>
+</symbol>
+
+<symbol id="art-teahouse" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="url(#sumiFade)"/>
+  <path d="M60 140 L200 80 L340 140 L320 150 L200 95 L80 150 Z" fill="#242320" stroke="#c9a96e" stroke-width="1" opacity="0.85"/>
+  <path d="M70 138 L200 82 L330 138" fill="none" stroke="#8a7548" stroke-width="0.6" opacity="0.7"/>
+  <rect x="90" y="150" width="220" height="100" fill="#1f1d18" stroke="#c9a96e" stroke-width="0.7" opacity="0.7"/>
+  <g stroke="#8a7548" stroke-width="0.4" opacity="0.6">
+    <line x1="140" y1="160" x2="140" y2="240"/>
+    <line x1="170" y1="160" x2="170" y2="240"/>
+    <line x1="200" y1="160" x2="200" y2="240"/>
+    <line x1="230" y1="160" x2="230" y2="240"/>
+    <line x1="260" y1="160" x2="260" y2="240"/>
+    <line x1="125" y1="175" x2="275" y2="175"/>
+    <line x1="125" y1="195" x2="275" y2="195"/>
+    <line x1="125" y1="215" x2="275" y2="215"/>
+  </g>
+  <rect x="125" y="160" width="150" height="80" fill="#ede6d3" opacity="0.06"/>
+  <rect x="185" y="210" width="30" height="40" fill="#0f0e0b" stroke="#c9a96e" stroke-width="0.5" opacity="0.9"/>
+  <line x1="20" y1="250" x2="380" y2="250" stroke="#c9a96e" stroke-width="0.6" opacity="0.5"/>
+  <g stroke="#4a5240" stroke-width="1.4" fill="none" opacity="0.7" stroke-linecap="round">
+    <line x1="30" y1="250" x2="30" y2="120"/>
+    <line x1="34" y1="250" x2="34" y2="100"/>
+    <circle cx="30" cy="180" r="1.8" fill="#4a5240"/>
+    <circle cx="30" cy="220" r="1.8" fill="#4a5240"/>
+    <path d="M30 120 Q40 115 48 110" opacity="0.5"/>
+    <path d="M34 100 Q45 92 55 85" opacity="0.5"/>
+  </g>
+</symbol>
+
+<symbol id="art-garden" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="url(#sumiFade)"/>
+  <g fill="none" stroke="#c9a96e" stroke-width="0.5" opacity="0.55">
+    <path d="M0 220 Q100 215 200 220 T400 220"/>
+    <path d="M0 230 Q100 225 200 230 T400 230"/>
+    <path d="M0 240 Q100 235 200 240 T400 240"/>
+    <path d="M0 250 Q100 245 200 250 T400 250"/>
+    <path d="M0 260 Q100 255 200 260 T400 260"/>
+    <path d="M0 270 Q100 265 200 270 T400 270"/>
+    <path d="M0 280 Q100 275 200 280 T400 280"/>
+  </g>
+  <path d="M140 210 Q130 180 160 170 Q200 165 220 180 Q235 200 220 215 Z" fill="#0f0e0b" stroke="#8a7548" stroke-width="0.8" opacity="0.95"/>
+  <path d="M280 225 Q280 215 295 210 Q310 215 305 228 Z" fill="#0f0e0b" stroke="#8a7548" stroke-width="0.5" opacity="0.9"/>
+  <g fill="none" stroke="#c9a96e" stroke-width="0.4" opacity="0.45">
+    <ellipse cx="180" cy="215" rx="60" ry="10"/>
+    <ellipse cx="180" cy="215" rx="75" ry="13"/>
+    <ellipse cx="180" cy="215" rx="90" ry="16"/>
+  </g>
+  <g stroke="#4a5240" stroke-width="1.2" fill="none" opacity="0.75" stroke-linecap="round">
+    <line x1="340" y1="210" x2="340" y2="130"/>
+    <path d="M330 165 Q340 155 355 160"/>
+    <path d="M325 145 Q340 135 360 140"/>
+    <path d="M330 125 Q340 120 352 125"/>
+  </g>
+</symbol>
+
+<symbol id="art-mountain" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="url(#sumiFade)"/>
+  <path d="M0 180 L60 145 L100 155 L140 130 L180 145 L220 120 L260 135 L300 115 L340 130 L400 110 L400 300 L0 300 Z" fill="#0f0e0b" opacity="0.85"/>
+  <path d="M0 210 L50 185 L90 200 L140 170 L190 190 L240 165 L290 185 L340 170 L400 190 L400 300 L0 300 Z" fill="#1a1915" opacity="0.9"/>
+  <path d="M0 240 L70 220 L130 235 L200 215 L260 230 L320 220 L400 235 L400 300 L0 300 Z" fill="#242320" opacity="0.9"/>
+  <rect x="0" y="145" width="400" height="8" fill="#ede6d3" opacity="0.06"/>
+  <rect x="0" y="200" width="400" height="12" fill="#ede6d3" opacity="0.04"/>
+  <rect x="0" y="235" width="400" height="10" fill="#ede6d3" opacity="0.03"/>
+  <circle cx="280" cy="90" r="26" fill="url(#moonGlow)"/>
+  <circle cx="280" cy="90" r="10" fill="#ede6d3" opacity="0.3"/>
+  <g stroke="#0f0e0b" stroke-width="1.4" fill="none" opacity="0.9" stroke-linecap="round">
+    <line x1="60" y1="180" x2="60" y2="145"/>
+    <path d="M50 150 Q60 142 72 148"/>
+    <path d="M48 140 Q60 132 70 138"/>
+  </g>
+</symbol>
+
+<symbol id="art-bath" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="url(#sumiFade)"/>
+  <path d="M50 200 Q40 170 80 160 L320 160 Q360 170 350 200 L340 240 Q340 260 320 260 L80 260 Q60 260 60 240 Z" fill="#1f1d18" stroke="#8a7548" stroke-width="1" opacity="0.9"/>
+  <path d="M70 200 Q70 180 90 175 L310 175 Q330 180 330 200 L320 230 Q320 240 310 240 L90 240 Q80 240 80 230 Z" fill="#242320" stroke="#c9a96e" stroke-width="0.6" opacity="0.9"/>
+  <g stroke="#c9a96e" fill="none" stroke-width="0.5" opacity="0.6">
+    <path d="M100 200 Q150 198 200 200 T300 200"/>
+    <path d="M110 215 Q160 213 210 215 T310 215"/>
+    <path d="M105 225 Q155 223 205 225 T305 225"/>
+  </g>
+  <g opacity="0.55" stroke="#c9a96e" stroke-width="0.9" fill="none" stroke-linecap="round">
+    <path d="M130 150 Q135 125 130 105 T135 80" opacity="0.4"/>
+    <path d="M180 150 Q188 120 182 95 T190 70" opacity="0.5"/>
+    <path d="M230 150 Q238 125 232 100 T240 75" opacity="0.5"/>
+    <path d="M280 150 Q285 125 280 105 T285 80" opacity="0.4"/>
+  </g>
+  <g opacity="0.85">
+    <rect x="345" y="50" width="22" height="30" fill="#b2724e" stroke="#8a7548" stroke-width="0.5" opacity="0.6"/>
+    <circle cx="356" cy="65" r="7" fill="#c9a96e" opacity="0.5"/>
+    <line x1="356" y1="45" x2="356" y2="25" stroke="#8a7548" stroke-width="0.4"/>
+  </g>
+</symbol>
+</defs>
+</svg>
+
+<!-- Loader -->
+<div class="loader" id="loader">
+  <div class="loader-mark">SANSO&nbsp;&nbsp;TŌDA</div>
+  <div class="loader-line"></div>
+</div>
+
+<!-- Nav -->
+<nav class="nav" id="nav">
+  <a href="#" class="nav-logo">山荘 透雫<small>SANSO TŌDA</small></a>
+  <div class="nav-menu" id="navMenu">
+    <a href="#philosophy" data-jp>理念</a><a href="#philosophy" data-en>Philosophy</a>
+    <a href="#experiences" data-jp>滞在</a><a href="#experiences" data-en>The Stay</a>
+    <a href="#architecture" data-jp>建築</a><a href="#architecture" data-en>Architecture</a>
+    <a href="#timeline" data-jp>開業予定</a><a href="#timeline" data-en>Opening</a>
+    <a href="#cta" data-jp>お問い合わせ</a><a href="#cta" data-en>Contact</a>
+    <div class="lang-switch">
+      <button class="active" id="lang-ja">JP</button><span>/</span><button id="lang-en">EN</button>
+    </div>
+  </div>
+  <div class="nav-toggle" id="navToggle"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- Hero -->
+<header class="hero">
+  <div class="hero-media"></div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow">— Fukuoka, Japan · Est. 1795 —</div>
+    <h1 class="hero-title"><span data-jp>山荘 透雫</span><span data-en>Sanso Tōda</span></h1>
+    <div class="hero-subtitle"><span data-jp>魂の、帰る場所</span><span data-en>Home for the Soul</span></div>
+    <div class="hero-divider"></div>
+  </div>
+  <div class="hero-meta left">FUKUOKA — 230 YEARS</div>
+  <div class="hero-meta right">WELLNESS RETREAT RYOKAN</div>
+  <div class="hero-scroll">S C R O L L</div>
+</header>
+
+<!-- Prologue -->
+<section class="prologue">
+  <div class="prologue-kanji" aria-hidden="true"><span data-jp>静寂</span><span data-en>Stillness</span></div>
+  <div class="prologue-inner reveal">
+    <p data-jp>二百三十年の時を刻んだ、<br>ひとつの旅館が、静かに眠りから覚めようとしている。<br>福岡の山あいに、風と、霧と、<br>木々の声だけが流れる場所で。</p>
+    <p data-en>A ryokan that has held two hundred<br>and thirty years of silence<br>is quietly awakening from its long rest —<br>deep in the mountains of Fukuoka, where<br>only wind, mist, and trees have ever spoken.</p>
+    <span class="prologue-sign">— A Prologue —</span>
+  </div>
+</section>
+
+<!-- Philosophy -->
+<section class="philosophy" id="philosophy">
+  <div class="container">
+    <div class="philosophy-grid">
+      <div class="philosophy-visual reveal">
+        <span class="philosophy-num">001 / Philosophy</span>
+        <!-- REPLACE: 山荘透雫の実写真（本館外観・朝霧など）-->
+        <img src="https://images.unsplash.com/photo-1493780474015-ba834fd0ce2f?auto=format&fit=crop&w=1200&q=85" alt="" loading="lazy">
+        <div class="philosophy-seal" aria-hidden="true">雫</div>
+      </div>
+      <div class="philosophy-text reveal">
+        <span class="eyebrow" data-jp>理念</span><span class="eyebrow" data-en>Our Philosophy</span>
+        <h2 class="section-title"><span data-jp>時を、<br>受けとめる場所。</span><span data-en>A place that<br>holds time.</span></h2>
+        <p class="philosophy-quote"><span data-jp>「急ぐことを、やめて。」</span><span data-en>“ Cease your hurry. ”</span></p>
+        <p class="body-text">
+          <span data-jp>寛政の頃より、この山荘は旅人の身体と心をやわらかく解いてきました。二百三十年という歳月が刻んだ柱、磨かれた廊下、呼吸する土壁。私たちはそれらを、ただ保存するのではなく、今ふたたび「いのちが帰ってくる場所」として、静かに蘇らせます。</span>
+          <span data-en>Since the late 18th century, this mountain retreat has quietly welcomed weary travelers. Two hundred and thirty years live inside these pillars, polished corridors, and breathing earthen walls. We do not merely preserve what stands — we invite it, gently, to become a home where the soul can return.</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Experiences -->
+<section class="experiences" id="experiences">
+  <div class="container">
+    <div class="experiences-head reveal">
+      <span class="eyebrow centered" data-jp>滞在</span><span class="eyebrow centered" data-en>The Stay</span>
+      <h2 class="section-title"><span data-jp>五感で、<br>森に還る。</span><span data-en>Return to<br>the Forest.</span></h2>
+      <p class="body-text">
+        <span data-jp>湯に、膳に、朝の気配に。山荘透雫の一日は、自然との静かな対話でつづられます。</span>
+        <span data-en>In the bath, at the table, in the morning air — a day at Sanso Tōda is a quiet dialogue with nature.</span>
+      </p>
+    </div>
+
+    <div class="exp-grid">
+      <article class="exp-item reveal">
+        <div class="exp-art"><svg><use href="#art-onsen"/></svg></div>
+        <span class="exp-num">Ⅰ &nbsp;—&nbsp; Onsen</span>
+        <h3 class="exp-title"><span data-jp>湯 浴 み</span><span data-en>Bathing Ritual</span></h3>
+        <div class="exp-title-en"><span data-jp>Yu-ami</span><span data-en>湯浴み — Yu-ami</span></div>
+        <p class="exp-desc">
+          <span data-jp>山の伏流水でひかれた湯に、身を沈めれば、杉の香りがふわりと立ちのぼる。肌にやわらかな湯が、一日の疲れを、ほどいてゆきます。</span>
+          <span data-en>Submerge yourself in waters drawn from the mountain's hidden springs. The scent of cedar rises gently, and the day's weight dissolves in water that falls soft upon the skin.</span>
+        </p>
+      </article>
+
+      <article class="exp-item reveal" style="transition-delay:.15s">
+        <div class="exp-art">
+          <!-- REPLACE: 山荘透雫の懐石料理写真 -->
+          <img src="https://images.unsplash.com/photo-1580554530778-ca36943938b2?auto=format&fit=crop&w=1200&q=85" alt="" loading="lazy">
+        </div>
+        <span class="exp-num">Ⅱ &nbsp;—&nbsp; Kaiseki</span>
+        <h3 class="exp-title"><span data-jp>食 の 膳</span><span data-en>The Kaiseki Table</span></h3>
+        <div class="exp-title-en"><span data-jp>Zen — Kaiseki</span><span data-en>膳 — Zen</span></div>
+        <p class="exp-desc">
+          <span data-jp>地元の漁師が夜明けに届ける玄界の魚。この山でしか採れない山菜と茸。季節が、一皿ごとにあらわれる、静かな会席料理。</span>
+          <span data-en>Fish from the Genkai Sea, delivered by local fishermen at dawn. Wild vegetables and mushrooms found only on these slopes. The season quietly reveals itself, course by course.</span>
+        </p>
+      </article>
+
+      <article class="exp-item reveal" style="transition-delay:.3s">
+        <div class="exp-art"><svg><use href="#art-zen"/></svg></div>
+        <span class="exp-num">Ⅲ &nbsp;—&nbsp; Retreat</span>
+        <h3 class="exp-title"><span data-jp>寂 の 時 間</span><span data-en>The Hour of Silence</span></h3>
+        <div class="exp-title-en"><span data-jp>Jaku — Silence</span><span data-en>寂 — Jaku</span></div>
+        <p class="exp-desc">
+          <span data-jp>朝の坐禅、森の瞑想歩行、静かに呼吸を整える時間。熟練の指導のもと、おのずと自分と向きあう、ウェルネスリトリート。</span>
+          <span data-en>Morning meditation, forest walks that become prayer, hours set aside for breath. Guided retreats that bring one, without forcing, face to face with oneself.</span>
+        </p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- Passage of Time -->
+<section class="passage" id="passage">
+  <div class="passage-bg"></div>
+  <div class="passage-inner reveal">
+    <div class="passage-eyebrow">— Time at Sanso Tōda —</div>
+    <h2 class="passage-title"><span data-jp>時のうつろい</span><span data-en>Passage of Time</span></h2>
+    <p class="passage-sub"><span data-jp>二百三十年、静かに流れた</span><span data-en>Two hundred and thirty years, quietly flowing</span></p>
+    <div class="passage-numbers">
+      <span>1795</span><span class="dot">·</span>
+      <span>1868</span><span class="dot">·</span>
+      <span>1945</span><span class="dot">·</span>
+      <span class="now">2026</span><span class="dot">·</span>
+      <span>2027</span>
+    </div>
+  </div>
+</section>
+
+<!-- Architecture -->
+<section class="architecture" id="architecture">
+  <div class="container">
+    <div class="arch-head">
+      <div class="reveal">
+        <span class="eyebrow" data-jp>建築</span><span class="eyebrow" data-en>Architecture</span>
+        <h2 class="section-title"><span data-jp>受け継がれた、<br>手の仕事。</span><span data-en>The Craft<br>Passed Down.</span></h2>
+      </div>
+      <p class="body-text reveal">
+        <span data-jp>寛政七年に建てられた本棟を中心に、茶室、離れ、湯殿を、現代の職人の手で丁寧に蘇らせます。古き良きものを守りながら、今を生きる身体に寄りそう滞在のための設え。日本建築の美しさと、世界水準のもてなしが、ここで静かに出会います。</span>
+        <span data-en>The main structure — built in 1795 — along with the tea rooms, detached pavilions, and bath houses, are being revived by artisans of our time. Preserving what is old and beautiful, while offering every comfort the modern body asks for. Here, traditional Japanese architecture meets hospitality of the highest world order.</span>
+      </p>
+    </div>
+
+    <div class="arch-mosaic">
+      <figure class="m1 reveal">
+        <!-- REPLACE: 山荘本館の実写真 -->
+        <img src="https://images.unsplash.com/photo-1526481280693-3bfa7568e0f3?auto=format&fit=crop&w=1600&q=85" alt="" loading="lazy">
+        <figcaption>Main Hall <small>本棟</small></figcaption>
+      </figure>
+      <figure class="m2 reveal" style="transition-delay:.1s">
+        <svg><use href="#art-teahouse"/></svg>
+        <figcaption>Tea Room <small>茶室</small></figcaption>
+      </figure>
+      <figure class="m3 reveal" style="transition-delay:.2s">
+        <svg><use href="#art-garden"/></svg>
+        <figcaption>Garden <small>庭</small></figcaption>
+      </figure>
+      <figure class="m4 reveal" style="transition-delay:.3s">
+        <svg><use href="#art-bath"/></svg>
+        <figcaption>Bath <small>湯殿</small></figcaption>
+      </figure>
+      <figure class="m5 reveal" style="transition-delay:.4s">
+        <svg><use href="#art-mountain"/></svg>
+        <figcaption>Mountain <small>山</small></figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- Timeline -->
+<section class="timeline-sec" id="timeline">
+  <div class="container">
+    <div class="timeline-head reveal">
+      <span class="eyebrow centered" data-jp>開業へ向けて</span><span class="eyebrow centered" data-en>Toward Our Opening</span>
+      <h2 class="section-title"><span data-jp>静かに、扉をひらく</span><span data-en>Opening Softly</span></h2>
+    </div>
+
+    <div class="timeline">
+      <div class="tl-item is-done">
+        <div class="tl-content">
+          <div class="tl-title"><span data-jp>駐車場の開放</span><span data-en>Parking Lot Opens</span></div>
+          <div class="tl-desc"><span data-jp>登山者・自然愛好家の皆さまへ</span><span data-en>For hikers and nature lovers</span></div>
+        </div>
+        <div class="tl-dot"></div>
+        <div class="tl-date"><span data-jp>2025年 4〜6月</span><span data-en>Apr — Jun 2025</span><span class="tl-tag">Done</span></div>
+      </div>
+
+      <div class="tl-item is-done">
+        <div class="tl-content">
+          <div class="tl-title"><span data-jp>夏のアウトドア茶寮</span><span data-en>Summer Outdoor Café</span></div>
+          <div class="tl-desc"><span data-jp>かき氷、冷たい飲みもの、選りすぐりの品々</span><span data-en>Shaved ice, cold drinks, and select goods</span></div>
+        </div>
+        <div class="tl-dot"></div>
+        <div class="tl-date"><span data-jp>2025年 7〜8月</span><span data-en>Jul — Aug 2025</span><span class="tl-tag">Done</span></div>
+      </div>
+
+      <div class="tl-item is-next">
+        <div class="tl-content">
+          <div class="tl-title"><span data-jp>予約受付開始</span><span data-en>Bookings Open</span></div>
+          <div class="tl-desc"><span data-jp>ニュースレター登録者さまへ先行ご案内</span><span data-en>Early access for newsletter subscribers</span></div>
+        </div>
+        <div class="tl-dot"></div>
+        <div class="tl-date"><span data-jp>2026年 5月</span><span data-en>May 2026</span><span class="tl-tag">Next</span></div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-content">
+          <div class="tl-title"><span data-jp>ソフトオープン</span><span data-en>Soft Opening</span></div>
+          <div class="tl-desc"><span data-jp>限られたお客様をお迎えいたします</span><span data-en>Welcoming our first guests</span></div>
+        </div>
+        <div class="tl-dot"></div>
+        <div class="tl-date"><span data-jp>2027年 3月</span><span data-en>Mar 2027</span></div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-content">
+          <div class="tl-title"><span data-jp>グランドオープン</span><span data-en>Grand Opening</span></div>
+          <div class="tl-desc"><span data-jp>宿泊・リトリート本格始動</span><span data-en>Full stays &amp; retreats begin</span></div>
+        </div>
+        <div class="tl-dot"></div>
+        <div class="tl-date"><span data-jp>2027年 4月</span><span data-en>Apr 2027</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta" id="cta">
+  <div class="cta-seal" aria-hidden="true">雫</div>
+  <div class="cta-inner reveal">
+    <span class="eyebrow centered" data-jp>お問い合わせ</span><span class="eyebrow centered" data-en>Stay Connected</span>
+    <h2 class="cta-title"><span data-jp>透雫の、<br>最初のお客様に。</span><span data-en>Be among our<br>first guests.</span></h2>
+    <p class="cta-desc">
+      <span data-jp>ニュースレターにご登録いただいた皆様に、予約開始、リトリート、催事の情報を、いちはやくお届けいたします。</span>
+      <span data-en>Subscribe to be the first to receive news of booking availability, upcoming retreats, and seasonal events at Sanso Tōda.</span>
+    </p>
+    <form class="cta-form" id="subscribeForm">
+      <input type="email" placeholder="your@email.com" required aria-label="email">
+      <button type="submit"><span data-jp>ご登録</span><span data-en>Subscribe</span></button>
+    </form>
+    <p class="cta-note">
+      <span data-jp>私たちは決してスパムをお送りしません。大切なご連絡のみを、丁寧にお届けします。</span>
+      <span data-en>We'll never spam you. Only gentle, thoughtful updates.</span>
+    </p>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <h3>山荘 透雫</h3>
+        <small>SANSO TŌDA · Est. 1795</small>
+        <p>
+          <span data-jp>〒811-1134<br>福岡県福岡市早良区飯場 711<br>sansotoda@gmail.com</span>
+          <span data-en>711 Iiba, Sawara-ku<br>Fukuoka 811-1134, Japan<br>sansotoda@gmail.com</span>
+        </p>
+      </div>
+      <div class="foot-col">
+        <h5>Discover</h5>
+        <ul>
+          <li><a href="#philosophy" data-jp>理念</a><a href="#philosophy" data-en>Philosophy</a></li>
+          <li><a href="#experiences" data-jp>滞在</a><a href="#experiences" data-en>The Stay</a></li>
+          <li><a href="#architecture" data-jp>建築</a><a href="#architecture" data-en>Architecture</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5>Visit</h5>
+        <ul>
+          <li><a href="#timeline" data-jp>開業予定</a><a href="#timeline" data-en>Opening</a></li>
+          <li><a href="#cta" data-jp>お問い合わせ</a><a href="#cta" data-en>Contact</a></li>
+          <li><a href="#cta" data-jp>ニュースレター</a><a href="#cta" data-en>Newsletter</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5>Connect</h5>
+        <ul>
+          <li><a href="https://www.youtube.com/@SansoToda/videos" target="_blank" rel="noopener">YouTube</a></li>
+          <li><a href="#" target="_blank" rel="noopener">Instagram</a></li>
+          <li><a href="mailto:sansotoda@gmail.com">Email</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <div>© MMXXVI &nbsp;Sanso Tōda · Est. 1795</div>
+      <div>Closed for renovation until Spring 2027</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+window.addEventListener('load',()=>{setTimeout(()=>document.getElementById('loader').classList.add('hide'),1600);});
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>60);},{passive:true});
+const navToggle=document.getElementById('navToggle');
+const navMenu=document.getElementById('navMenu');
+navToggle.addEventListener('click',()=>{navToggle.classList.toggle('open');navMenu.classList.toggle('open');});
+navMenu.querySelectorAll('a').forEach(a=>{a.addEventListener('click',()=>{navToggle.classList.remove('open');navMenu.classList.remove('open');});});
+const langJa=document.getElementById('lang-ja');
+const langEn=document.getElementById('lang-en');
+function setLang(lang){document.body.dataset.lang=lang;document.documentElement.lang=lang;langJa.classList.toggle('active',lang==='ja');langEn.classList.toggle('active',lang==='en');try{localStorage.setItem('sansotoda-lang',lang)}catch(e){}}
+langJa.addEventListener('click',()=>setLang('ja'));
+langEn.addEventListener('click',()=>setLang('en'));
+try{const saved=localStorage.getItem('sansotoda-lang');if(saved){setLang(saved)}}catch(e){}
+const io=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in-view');io.unobserve(e.target);}});},{threshold:0.12,rootMargin:'0px 0px -60px 0px'});
+document.querySelectorAll('.reveal, .tl-item, .passage').forEach(el=>io.observe(el));
+const heroMedia=document.querySelector('.hero-media');
+window.addEventListener('scroll',()=>{const y=window.scrollY;if(y<window.innerHeight){heroMedia.style.transform=`scale(${1+y*0.0004}) translateY(${y*0.2}px)`;}},{passive:true});
+document.getElementById('subscribeForm').addEventListener('submit',function(e){e.preventDefault();const btn=this.querySelector('button');const lang=document.body.dataset.lang;btn.innerHTML=lang==='en'?'Thank you':'ありがとうございました';btn.disabled=true;this.querySelector('input').value='';});
+</script>
+</body>
+</html>
